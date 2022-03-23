@@ -1,0 +1,51 @@
+#LetsGrowMore #MAR2022
+
+Author-Soujannya Deb
+
+Task(1)-Iris Flowers Classification
+
+Language-Python
+
+Software- Jupyter Notebook(Colaboratory)
+
+
+
+Importing libraries
+
+# IMPORTING LIBRARIES
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+Data Loading
+
+data_frame=pd.read_csv("Iris.csv")
+
+Analyze and Visualization of data
+
+data_frame.head()
+
+data_frame.describe()
+
+import plotly.express as pex
+chart=pex.scatter(data_frame,x="SepalWidthCm",y="SepalLengthCm")
+chart.show()
+
+Model Training
+
+x=data_frame.drop("Species",axis=1)
+y=data_frame["Species"]
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=0)
+
+from sklearn.neighbors import KNeighborsClassifier
+knowledge_base=KNeighborsClassifier(n_neighbors=1)
+knowledge_base.fit(x_train,y_train)
+
+prediction=knowledge_base.predict(x_test)
+print(f"Prediction: {prediction}")
+
+from sklearn.metrics import accuracy_score
+print(accuracy_score(y_test,prediction))
+
